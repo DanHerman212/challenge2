@@ -111,20 +111,36 @@ def save_qualifying_loans(qualifying_loans):
     """
     
     # @TODO: Complete the usability dialog for savings the CSV Files.
+   
+    """Give the user the option to save results or opt out"""
     
+    if len(qualifying_loans) > 0:
 
-    """Save File"""
-    header = ["Bank", "Max Loan", "Max LTV", "Max DTI", "Min Credit", "Rate"]
+        """Prompt user to save results with option to opt out"""
+        save_results = questionary.confirm("Would you like to save results to CSV?").ask()
+        
+        """Prompts user for file location"""
+        file_path = questionary.text("Please specify location for CSV:").ask()
+        file_path = Path(file_path)
 
-    csvpath = Path("qualifying_loans.csv")
+        header = ["Bank", "Max Loan", "Max LTV", "Max DTI", "Min Credit", "Rate"]
+        
+        """Save File Function"""
+        
+        with open(file_path, "w", newline = "") as csvfile:
+            csvwriter = csv.writer(csvfile, delimiter=",")
+            csvwriter.writerow(header)
 
-    with open(csvpath, "w") as csvfile:
-        csvwriter = csv.writer(csvfile, delimiter=",")
-    
-    for item in qualifying_loans:
-            csvwriter.writerow(item.values())
+            for loan in qualifying_loans:
+                csvwriter.writerow(loan)
 
-
+        if not save_results: 
+            print(f"Thank you for using The Loan Qualifier App")
+        sys.exit()
+        
+    else:
+        print("I'm sorry, but the applicant does not qualify for any loans.")
+        sys.exit()
 
     
 def run():
