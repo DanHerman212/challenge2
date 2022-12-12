@@ -1,33 +1,54 @@
 # Project Title
 
-Just after the title, introduce your project by describing attractively what the project is about and what is the main problem that inspires you to create this project or what is the main contribution for the potential user of your project.
+The Loan Qualifer App is a command-line interface application, written in Python, designed to help users quickly find qualifying loans against a list located in 'daily_rate_sheet'.  The app will take user data and determine eligibility and return a list of loans that the user qualifies for and give them the option to save a spreadsheet to share with their colleagues.
 
 ---
 
 ## Technologies
 
-Describe the technologies required to use your project such as programming languages, libraries, frameworks, and operating systems. Be sure to include the specific versions of any critical dependencies that you have used in the stable version of your project.
+This project leverages python 3.7 with the following libraries:
+
+* [fire](https://github.com/google/python-fire) - For the command line interface, 
+
+* [questionary](https://github.com/tmbo/questionary) - For interactive user prompts and dialogs
+
 
 ---
 
 ## Installation Guide
 
-In this section, you should include detailed installation notes containing code blocks and screenshots.
+Before running the application, the following dependencies must be installed
+
+'''
+python
+pip install fire
+pip install questionary
+'''
 
 ---
 
 ## Usage
 
-This section should include screenshots, code blocks, or animations explaining how to use your project.
+The application will prompt the user for the following:
+**File Path, Credit Score, Debt, Income, Loan, LTV**
+
+![Loan Qualifier Prompts](images/loan_qualifier.png)
+
+The application will calculate and display the following:
+**DTI, LTV and number of qualified loans**
+
+The app then gives the user option to save to CSV:
+
+![Loan Qualifier Results](images/results.png)
 
 ---
 
 ## Contributors
 
-In this section, list all the people who contribute to this project. You might want recruiters or potential collaborators to reach you, so include your contact email and, optionally, your LinkedIn or Twitter profile.
-
+Dan Herman
+ET Home Loans
 ---
 
 ## License
 
-When you share a project on a repository, especially a public one, it's important to choose the right license to specify what others can and can't with your source code and files. Use this section to include the license you want to use.
+MIT
