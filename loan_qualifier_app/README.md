@@ -19,11 +19,11 @@ This project leverages python 3.7 with the following libraries:
 
 Before running the application, the following dependencies must be installed
 
-'''
+```
 python
 pip install fire
 pip install questionary
-'''
+```
 
 ---
 
