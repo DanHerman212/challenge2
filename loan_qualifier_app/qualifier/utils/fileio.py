@@ -33,13 +33,18 @@ def load_csv(csvpath):
             data.append(row)
     return data
 
-"""Modularized function to save CSV"""
+
 def save_csv(bank_data,csvpath, header):
-    """Args:
-    bank_data - list of loans that meet the barrower criteris
-    csvpath - location where the file will be saved
-    header - uses pre-defined header to improve presentation
-    """
+    """module for saving reports to csv.
+    
+    Args:
+    bank_data (list) - list of loans that meet the barrower criteris
+    csvpath (Path) - location where the file will be saved
+    header - (list) uses pre-defined header to improve presentation
+
+    returns:
+    filtered results, based on barrower data, saves to CSV
+"""
     # opens CSV in "write mode", using csvpath as the location 
     with open(csvpath, "w", newline = "") as csvfile:
         
