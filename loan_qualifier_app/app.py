@@ -118,17 +118,20 @@ def save_qualifying_loans(qualifying_loans):
 
             """Prompt user to save results with option to opt out"""
             save_results = questionary.confirm("Would you like to save results to CSV?").ask()
-        
+
             """Prompts user for file location"""
             file_path = questionary.text("Please specify location for CSV:").ask()
             file_path = Path(file_path)
             
+            """Specific header used to save bank data"""
             header = ["Bank", "Max Loan", "Max LTV", "Max DTI", "Min Credit", "Rate"]
 
+            """When user opts out, the system presents a message and then closes"""
             if not save_results: 
                 print(f"Thank you for using The Loan Qualifier App")
                 sys.exit()    
             
+            """Save function was stored on fileio.py imput/output module"""
             save_csv(qualifying_loans,file_path,header) 
             bank_data = qualifying_loans
             csvpath = file_path

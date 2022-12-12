@@ -20,6 +20,7 @@ def load_csv(csvpath):
         A list of lists that contains the rows of data from the CSV file.
 
     """
+    
     with open(csvpath, "r") as csvfile:
         data = []
         csvreader = csv.reader(csvfile, delimiter=",")
@@ -34,14 +35,20 @@ def load_csv(csvpath):
 
 """Modularized function to save CSV"""
 def save_csv(bank_data,csvpath, header):
+    """Args:
+    bank_data - list of loans that meet the barrower criteris
+    csvpath - location where the file will be saved
+    header - uses pre-defined header to improve presentation
+    """
+    # opens CSV in "write mode", using csvpath as the location 
+    with open(csvpath, "w", newline = "") as csvfile:
+        
+        # uses csvwriter to format output in CSV file
+        csvwriter = csv.writer(csvfile, delimiter=",")
+        csvwriter.writerow(header)
 
-        """Save File Function"""
-    
-        with open(csvpath, "w", newline = "") as csvfile:
-            csvwriter = csv.writer(csvfile, delimiter=",")
-            csvwriter.writerow(header)
-
-            for loan in bank_data:
+        # loops through every row in bank_data and writes to CSV
+        for loan in bank_data:
                 csvwriter.writerow(loan)
 
         
