@@ -4,8 +4,11 @@
 This contains a helper function for loading and saving CSV files.
 
 """
+from pathlib import Path
+import sys
 import csv
-
+import fire
+import questionary
 
 def load_csv(csvpath):
     """Reads the CSV file from path provided.
@@ -28,3 +31,17 @@ def load_csv(csvpath):
         for row in csvreader:
             data.append(row)
     return data
+
+"""Modularized function to save CSV"""
+def save_csv(bank_data,csvpath, header):
+
+        """Save File Function"""
+    
+        with open(csvpath, "w", newline = "") as csvfile:
+            csvwriter = csv.writer(csvfile, delimiter=",")
+            csvwriter.writerow(header)
+
+            for loan in bank_data:
+                csvwriter.writerow(loan)
+
+        

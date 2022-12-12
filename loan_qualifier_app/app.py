@@ -12,7 +12,7 @@ import questionary
 import csv
 from pathlib import Path
 
-from qualifier.utils.fileio import load_csv
+from qualifier.utils.fileio import load_csv, save_csv
 
 from qualifier.utils.calculators import (
     calculate_monthly_debt_ratio,
@@ -116,33 +116,27 @@ def save_qualifying_loans(qualifying_loans):
     
     if len(qualifying_loans) > 0:
 
-        """Prompt user to save results with option to opt out"""
-        save_results = questionary.confirm("Would you like to save results to CSV?").ask()
+            """Prompt user to save results with option to opt out"""
+            save_results = questionary.confirm("Would you like to save results to CSV?").ask()
         
-        """Prompts user for file location"""
-        file_path = questionary.text("Please specify location for CSV:").ask()
-        file_path = Path(file_path)
+            """Prompts user for file location"""
+            file_path = questionary.text("Please specify location for CSV:").ask()
+            file_path = Path(file_path)
+            
+            header = ["Bank", "Max Loan", "Max LTV", "Max DTI", "Min Credit", "Rate"]
 
-        header = ["Bank", "Max Loan", "Max LTV", "Max DTI", "Min Credit", "Rate"]
-        
-        """Save File Function"""
-        
-        with open(file_path, "w", newline = "") as csvfile:
-            csvwriter = csv.writer(csvfile, delimiter=",")
-            csvwriter.writerow(header)
-
-            for loan in qualifying_loans:
-                csvwriter.writerow(loan)
-
-        if not save_results: 
-            print(f"Thank you for using The Loan Qualifier App")
-        sys.exit()
-        
+            if not save_results: 
+                print(f"Thank you for using The Loan Qualifier App")
+                sys.exit()    
+            
+            save_csv(qualifying_loans,file_path,header) 
+            bank_data = qualifying_loans
+            csvpath = file_path
+            
+            
     else:
-        print("I'm sorry, but the applicant does not qualify for any loans.")
-        sys.exit()
-
-    
+        sys.exit("I'm sorry, but the applicant does not qualify for any loans.")
+        
 def run():
     """The main function for running the script."""
 
